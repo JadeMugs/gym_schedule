@@ -31,18 +31,20 @@ export const NavBar: React.FC<ComponentNavBarProps> = ({ links }) => {
 		[activeLink, links],
 	);
 
-	const notificationElement = <NotificationIcon size={32} className="link" />;
+	const notificationElement = (
+		<span>
+			<NotificationIcon size={32} className="link" />
+		</span>
+	);
 	const avatarElement = (
 		<img src="https://i.pravatar.cc/100?img=16" className="avatar" />
 	);
 
 	return (
 		<nav>
-			<div>
-				{linksElements}
-				{notificationElement}
-				{avatarElement}
-			</div>
+			{linksElements}
+			{notificationElement}
+			{avatarElement}
 		</nav>
 	);
 };
