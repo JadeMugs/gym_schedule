@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { Link, matchPath, useLocation } from "react-router-dom";
 import { ComponentNavBarProps } from "src/types";
+import { NotificationIcon } from "src/icons";
 
 export const NavBar: React.FC<ComponentNavBarProps> = ({ links }) => {
 	const location = useLocation();
@@ -17,15 +18,31 @@ export const NavBar: React.FC<ComponentNavBarProps> = ({ links }) => {
 	const linksElements = useMemo(
 		() =>
 			links.map(({ icon: Icon, id, path }) => (
-				<div key={id}>
-					{/* TODO: add style */}
-					<Link to={path}>
-						<Icon color={activeLink === id ? "red" : "gray"} />
+				<span key={id}>
+					<Link
+						to={path}
+						className={activeLink === id ? "active-link link" : "link"}
+					>
+						<Icon size={32} />
+						{/* TODO: fix the size */}
 					</Link>
-				</div>
+				</span>
 			)),
 		[activeLink, links],
 	);
 
-	return <div>{linksElements}</div>;
+	const notificationElement = <NotificationIcon size={32} className="link" />;
+	const avatarElement = (
+		<img src="https://i.pravatar.cc/100?img=16" className="avatar" />
+	);
+
+	return (
+		<nav>
+			<div>
+				{linksElements}
+				{notificationElement}
+				{avatarElement}
+			</div>
+		</nav>
+	);
 };

@@ -1,0 +1,32 @@
+@use "./_colors.scss" as colors;
+
+nav {
+	height: min(10vh, 64px);
+
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+
+	div {
+		.link {
+			color: colors.$gray;
+			text-decoration: none;
+			margin: 0 1em;
+
+			&.active-link {
+				color: colors.$main;
+				background-color: colors.$secondary;
+			}
+		}
+
+		.avatar {
+			border-radius: 50%;
+			width: 32px;
+			height: 32px;
+		}
+
+		@media screen and (min-width: 768px) {
+			margin-inline: 10%;
+		}
+	}
+}

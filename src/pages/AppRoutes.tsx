@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Outlet, matchPath } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 import { Dashboard, Planning } from ".";
 import { AppRoutesProps } from "src/types";
 import { NavBar } from "src/components";
@@ -21,15 +21,6 @@ const ProtectedRoute = () => {
 		{ id: "Dashboard", path: "", icon: DashboardLinkIcon },
 		{ id: "Planning", path: "planning", icon: PlannerLinkIcon },
 	];
-
-	const activeLink = (
-		pages.find((page) => matchPath(page.path, window.location.pathname)) ??
-		pages[0]
-	).id;
-	console.log(
-		"🚀 ~ file: AppRoutes.tsx ~ line 29 ~ ProtectedRoute ~ activeLink",
-		activeLink,
-	);
 
 	return (
 		<div>

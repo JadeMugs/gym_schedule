@@ -1,5 +1,7 @@
 import React from "react";
-import "./App.css";
+// import "./App.css";
+import "src/styles/_colors.scss";
+import "src/styles/components.scss";
 import { BrowserRouter } from "react-router-dom";
 import { AppRoutes } from "src/pages/AppRoutes";
 
