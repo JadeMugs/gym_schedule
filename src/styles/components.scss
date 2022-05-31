@@ -1,6 +1,28 @@
 @use "./_colors.scss" as colors;
 
-nav {
+button {
+	padding: 10px 1rem;
+	border: none;
+	color: colors.$primary;
+	font-weight: 600;
+
+	&.primary-button {
+		background-color: colors.$white;
+		border: 2px solid colors.$primary;
+	}
+
+	&.secondary-button {
+		background-color: colors.$secondary;
+	}
+
+	&.cancel-button {
+		background-color: colors.$white;
+		border: 2px solid colors.$warning;
+	}
+}
+
+nav,
+footer {
 	height: min(10vh, 64px);
 
 	display: flex;
@@ -13,7 +35,7 @@ nav {
 		margin: 0 1em;
 
 		&.active-link {
-			color: colors.$main;
+			color: colors.$primary;
 			background-color: colors.$secondary;
 		}
 	}

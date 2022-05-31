@@ -22,7 +22,7 @@
 		"quotes": [2, "double", { "allowTemplateLiterals": true }],
 		"space-before-function-paren": ["error", "never"],
 		"no-tabs": ["error", { "allowIndentationTabs": true }],
-		"indent": ["error", "tab"],
+		"indent": ["error", "tab", { "SwitchCase": 1 }],
 		"comma-dangle": ["error", "always-multiline"]
 	},
 	"overrides": [

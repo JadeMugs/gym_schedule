@@ -1,5 +1,12 @@
 import React, { useMemo, useState } from "react";
-import { Categories, Clubs, Courses, CoursesByClub } from "src/data";
+import { CourseDetails } from "src/components/CourseDetails";
+import {
+	Categories,
+	Clubs,
+	Courses,
+	CoursesByClub,
+	UserCourses,
+} from "src/data";
 import { PagePlanningProps } from "src/types";
 
 export const Planning: React.FC<PagePlanningProps> = () => {
@@ -43,10 +50,12 @@ export const Planning: React.FC<PagePlanningProps> = () => {
 
 	return (
 		<div>
+			{/* Dates are not handled */}
 			{dates.map((date) => (
 				<div key={date}>{date}</div>
 			))}
 
+			{/* Filters */}
 			<div>
 				<select name="club" onChange={(e) => setSelectedClub(e.target.value)}>
 					{Clubs.map((club) => (
@@ -72,7 +81,8 @@ export const Planning: React.FC<PagePlanningProps> = () => {
 					onChange={(e) => setSelectedCourse(e.target.value)}
 				>
 					<option key="empty" value={undefined}>
-						tutte
+						{/* TODO: use a dictionary */}
+						Tutte
 					</option>
 					{Courses.map((course) => (
 						<option key={course.id} value={course.id}>
@@ -82,11 +92,28 @@ export const Planning: React.FC<PagePlanningProps> = () => {
 				</select>
 			</div>
 
+			{/* Courses */}
 			<div>
 				{selectedClub &&
-					currentClubCourses.map((course) => (
-						<div key={course.id}>{course.id}</div>
-					))}
+					currentClubCourses.map((course) => {
+						const courseData = coursesData[course.courseId];
+						const currentUserCourse = UserCourses[selectedClub].find(
+							(userCourse) => userCourse.courseClubId === course.id,
+						);
+						const category = Categories.find(
+							({ id }) => courseData.categoryId === id,
+						);
+
+						return (
+							<CourseDetails
+								key={course.id}
+								courseByClub={course}
+								courseData={courseData}
+								userCourse={currentUserCourse}
+								courseCategory={category}
+							/>
+						);
+					})}
 			</div>
 		</div>
 	);
