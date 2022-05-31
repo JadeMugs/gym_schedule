@@ -1,11 +1,4 @@
-export type Announcement = {
-	title: string;
-	date: string;
-	details: string;
-	isRead: boolean;
-};
-
-export type AnnouncementList = Announcement[];
+import { Announcement } from "src/types";
 
 export type ComponentAnnouncementProps = Announcement & {
 	isOpen: boolean;
