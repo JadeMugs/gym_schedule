@@ -8,13 +8,15 @@ import {
 	UserCourses,
 } from "src/data";
 import { PagePlanningProps } from "src/types";
+import { CourseIcon, ClubIcon, CourseCategoryIcon } from "src/icons";
 
 export const Planning: React.FC<PagePlanningProps> = () => {
 	const today = new Date("2019-12-16");
-	const dates = Array.from(Array(7).keys()).map((i) => i + today.getDate());
+	const dates = Array.from(Array(7).keys()).map((i) => today.getDate() + i);
 
 	// State
 
+	const [selectedDate, setSelectedDate] = useState(0);
 	const [selectedClub, setSelectedClub] = useState<string | undefined>(
 		Clubs[0].id,
 	);
@@ -50,13 +52,30 @@ export const Planning: React.FC<PagePlanningProps> = () => {
 
 	return (
 		<div>
-			{/* Dates are not handled */}
-			{dates.map((date) => (
-				<div key={date}>{date}</div>
-			))}
+			{/* Dates are mocked and not handled correctly. */}
+			<div className="planning-days">
+				{dates.map((date, index) => (
+					<div
+						className={index === selectedDate ? "active" : ""}
+						key={date}
+						onClick={() => setSelectedDate(index)}
+					>
+						<small>
+							{
+								["LUN", "MAR", "MER", "GIO", "VEN", "SAB", "DOM"][
+									(today.getDay() + index) % 7
+								]
+							}
+						</small>
+						<p>{date}</p>
+						<small>DEC</small>
+					</div>
+				))}
+			</div>
 
 			{/* Filters */}
-			<div>
+			<div className="planning-filters">
+				<ClubIcon size="24px" />
 				<select name="club" onChange={(e) => setSelectedClub(e.target.value)}>
 					{Clubs.map((club) => (
 						<option key={club.id} value={club.id}>
@@ -65,31 +84,37 @@ export const Planning: React.FC<PagePlanningProps> = () => {
 					))}
 				</select>
 
-				<select
-					name="category"
-					onChange={(e) => setSelectedCategory(e.target.value)}
-				>
-					{Categories.map((category) => (
-						<option key={category.id} value={category.id}>
-							{category.label}
-						</option>
-					))}
-				</select>
+				<div>
+					<CourseCategoryIcon size="24px" />
+					<select
+						name="category"
+						onChange={(e) => setSelectedCategory(e.target.value)}
+					>
+						{Categories.map((category) => (
+							<option key={category.id} value={category.id}>
+								{category.label}
+							</option>
+						))}
+					</select>
+				</div>
 
-				<select
-					name="course"
-					onChange={(e) => setSelectedCourse(e.target.value)}
-				>
-					<option key="empty" value={undefined}>
-						{/* TODO: use a dictionary */}
-						Tutte
-					</option>
-					{Courses.map((course) => (
-						<option key={course.id} value={course.id}>
-							{course.name}
+				<div>
+					<CourseIcon size="24px" />
+					<select
+						name="course"
+						onChange={(e) => setSelectedCourse(e.target.value)}
+					>
+						<option key="empty" value={undefined}>
+							{/* TODO: use a dictionary */}
+							Tutte
 						</option>
-					))}
-				</select>
+						{Courses.map((course) => (
+							<option key={course.id} value={course.id}>
+								{course.name}
+							</option>
+						))}
+					</select>
+				</div>
 			</div>
 
 			{/* Courses */}

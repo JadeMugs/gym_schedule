@@ -1,0 +1,139 @@
+@use "./_colors.scss" as colors;
+
+button {
+	padding: 10px 1rem;
+	border: none;
+	color: colors.$primary;
+	font-weight: 600;
+
+	&.primary-button {
+		background-color: colors.$white;
+		border: 2px solid colors.$primary;
+	}
+
+	&.secondary-button {
+		background-color: colors.$secondary;
+	}
+
+	&.cancel-button {
+		background-color: colors.$white;
+		border: 2px solid colors.$warning;
+	}
+}
+
+nav,
+footer {
+	height: min(10vh, 64px);
+
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+
+	.link {
+		color: colors.$gray;
+		text-decoration: none;
+		margin: 0 1em;
+
+		&.active-link {
+			color: colors.$primary;
+			background-color: colors.$secondary;
+		}
+	}
+
+	.avatar {
+		border-radius: 50%;
+		width: 32px;
+		height: 32px;
+		margin: 0 1em;
+	}
+
+	@media screen and (min-width: 600px) {
+		justify-content: flex-end;
+		margin-inline: 10%;
+	}
+}
+
+.planning-filters {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: colors.$primary;
+
+	select {
+		color: colors.$primary;
+		background: none;
+		border: none;
+		border-bottom: 1px solid colors.$primary;
+		margin: 0.5rem;
+	}
+
+	@media screen and (min-width: 600px) {
+		flex-direction: row;
+
+		background: -webkit-linear-gradient(
+			30deg,
+			colors.$secondary 85%,
+			colors.$white 85%
+		);
+	}
+}
+
+.planning-days {
+	display: flex;
+	justify-content: flex-end;
+	align-content: flex-end;
+	align-items: center;
+	background: colors.$primary;
+	color: colors.$gray;
+	padding: 1rem 0;
+
+	& div {
+		cursor: pointer;
+		background-color: colors.$white;
+		padding-inline: 0.7rem;
+		text-align: center;
+		line-height: 0.9rem;
+
+		p {
+			margin: 0 5px;
+			text-align: center;
+			font-weight: 600;
+			font-size: 1em;
+		}
+
+		small {
+			font-size: 0.6rem;
+		}
+
+		&.active {
+			background: colors.$secondary;
+			color: colors.$primary;
+		}
+	}
+
+	@media screen and (min-width: 600px) {
+		justify-content: center;
+		background: -webkit-linear-gradient(
+			30deg,
+			colors.$secondary 15%,
+			colors.$primary 15%
+		);
+
+		& div {
+			background-color: transparent;
+			color: colors.$white;
+			padding-inline: 2rem;
+
+			&.active {
+				background: -webkit-linear-gradient(
+					15deg,
+					transparent 15%,
+					colors.$secondary 15%,
+					colors.$secondary 85%,
+					transparent 85%
+				);
+			}
+		}
+	}
+}

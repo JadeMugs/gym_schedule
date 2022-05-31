@@ -4,7 +4,11 @@ import {
 	BiBell as NotificationIcon,
 	BiChevronDown as OpenAnnouncementIcon,
 	BiChevronRight as ClosedAnnouncementIcon,
+	BiMap as ClubIcon,
+	BiDumbbell as CourseIcon,
 } from "react-icons/bi";
+
+import { MdOutlineLocalFireDepartment as CourseCategoryIcon } from "react-icons/md";
 
 export {
 	DashboardLinkIcon,
@@ -12,4 +16,7 @@ export {
 	NotificationIcon,
 	OpenAnnouncementIcon,
 	ClosedAnnouncementIcon,
+	ClubIcon,
+	CourseIcon,
+	CourseCategoryIcon,
 };
