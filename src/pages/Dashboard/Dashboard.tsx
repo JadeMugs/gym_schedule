@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { PageDashboardProps } from "src/types";
 import { AnnouncementList } from "src/data";
-import { Announcement } from "src/components/Announcement";
+import { Announcement } from "src/components";
 
 export const Dashboard: React.FC<PageDashboardProps> = () => {
 	const [openAnnouncements, setOpenAnnouncements] = useState<string[]>([]);

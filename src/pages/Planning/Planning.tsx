@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { CourseDetails } from "src/components/CourseDetails";
+import { CourseDetails } from "src/components";
 import {
 	Categories,
 	Clubs,

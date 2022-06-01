@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route, Outlet } from "react-router-dom";
 import { Dashboard, Planning } from ".";
 import { AppRoutesProps } from "src/types";
-import { NavBar } from "src/components";
+import { NavBar, Footer } from "src/components";
 import { DashboardLinkIcon, PlannerLinkIcon } from "src/icons";
 
 export const AppRoutes: React.FC<AppRoutesProps> = () => {
@@ -26,6 +26,7 @@ const ProtectedRoute = () => {
 		<div>
 			<NavBar links={pages} />
 			<Outlet />
+			<Footer />
 		</div>
 	);
 };
