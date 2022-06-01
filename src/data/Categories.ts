@@ -17,7 +17,7 @@ export const Categories: CategoriesList = [
 		color: "#f24437",
 	},
 	{
-		id: "Dance",
+		id: "dance",
 		label: "Danza",
 		color: "#9b29b1",
 	},

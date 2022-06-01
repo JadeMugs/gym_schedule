@@ -6,6 +6,7 @@ import {
 	BiChevronRight as ClosedAnnouncementIcon,
 	BiMap as ClubIcon,
 	BiDumbbell as CourseIcon,
+	BiTime as DurationIcon,
 } from "react-icons/bi";
 
 import { MdOutlineLocalFireDepartment as CourseCategoryIcon } from "react-icons/md";
@@ -19,4 +20,5 @@ export {
 	ClubIcon,
 	CourseIcon,
 	CourseCategoryIcon,
+	DurationIcon,
 };

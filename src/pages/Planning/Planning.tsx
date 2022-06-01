@@ -118,7 +118,7 @@ export const Planning: React.FC<PagePlanningProps> = () => {
 			</div>
 
 			{/* Courses */}
-			<div>
+			<div style={{ marginInline: "10%" }}>
 				{selectedClub &&
 					currentClubCourses.map((course) => {
 						const courseData = coursesData[course.courseId];
