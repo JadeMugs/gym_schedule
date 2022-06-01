@@ -37,7 +37,7 @@ export const NavBar: React.FC<ComponentNavBarProps> = ({ links }) => {
 		</span>
 	);
 	const avatarElement = (
-		<img src="https://i.pravatar.cc/100?img=16" className="avatar" />
+		<img src="https://i.pravatar.cc/100?img=16" className="avatar clickable" />
 	);
 
 	return (

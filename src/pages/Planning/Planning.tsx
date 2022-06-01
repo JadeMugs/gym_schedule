@@ -56,7 +56,9 @@ export const Planning: React.FC<PagePlanningProps> = () => {
 			<div className="planning-days">
 				{dates.map((date, index) => (
 					<div
-						className={index === selectedDate ? "active" : ""}
+						className={
+							index === selectedDate ? "active clickable" : "clickable"
+						}
 						key={date}
 						onClick={() => setSelectedDate(index)}
 					>

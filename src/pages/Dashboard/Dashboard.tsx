@@ -30,5 +30,5 @@ export const Dashboard: React.FC<PageDashboardProps> = () => {
 		[openAnnouncements],
 	);
 
-	return <div>{AnnouncementsElement}</div>;
+	return <div className="dashboard">{AnnouncementsElement}</div>;
 };

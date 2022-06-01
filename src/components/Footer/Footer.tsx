@@ -23,7 +23,10 @@ export const Footer: React.FC<ComponentFooterProps> = () => {
 				</a>
 			</div>
 
-			<div className="language">
+			<div
+				className="language clickable"
+				onClick={() => window.alert("Ops, i18n has not been added yet!")}
+			>
 				<img src="/assets/italy.png" alt="italiano" width="18px" />
 				<p>ITA</p> <OpenAnnouncementIcon />
 			</div>
