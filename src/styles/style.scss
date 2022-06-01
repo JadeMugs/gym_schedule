@@ -21,13 +21,8 @@ button {
 	}
 }
 
-nav,
-footer {
-	height: min(10vh, 64px);
-
-	display: flex;
+nav {
 	justify-content: space-around;
-	align-items: center;
 
 	.link {
 		color: colors.$gray;
@@ -46,6 +41,35 @@ footer {
 		height: 32px;
 		margin: 0 1em;
 	}
+}
+
+footer {
+	flex-direction: column;
+	justify-content: flex-end;
+
+	a {
+		padding-inline: 0.5rem;
+	}
+
+	.language {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		gap: 5px;
+		margin-inline: 1rem;
+	}
+
+	@media screen and (min-width: 600px) {
+		flex-direction: row;
+	}
+}
+
+nav,
+footer {
+	height: min(10vh, 64px);
+	display: flex;
+	align-items: center;
 
 	@media screen and (min-width: 600px) {
 		justify-content: flex-end;
