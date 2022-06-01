@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { ClubCourseByUser, PageDashboardProps } from "src/types";
 import { AnnouncementList, UserCourses } from "src/data";
-import { Announcement, SectionTitle } from "src/components";
+import { Announcement, Magazine, SectionTitle } from "src/components";
 import { MagazineIcon, NotificationIcon, PlannerLinkIcon } from "src/icons";
 
 export const Dashboard: React.FC<PageDashboardProps> = () => {
@@ -58,12 +58,20 @@ export const Dashboard: React.FC<PageDashboardProps> = () => {
 				{AnnouncementsElement}
 			</div>
 
-			<SectionTitle
-				className="primary"
-				title="Magazine"
-				icon={<MagazineIcon />}
-				showButton={true}
-			/>
+			<div>
+				<SectionTitle
+					className="primary"
+					title="Magazine"
+					icon={<MagazineIcon />}
+					showButton={true}
+				/>
+				<div className="magazines">
+					{/* TODO: add mobile responsiveness */}
+					{Array.from(Array(4)).map((_, index) => (
+						<Magazine key={index} />
+					))}
+				</div>
+			</div>
 		</div>
 	);
 };

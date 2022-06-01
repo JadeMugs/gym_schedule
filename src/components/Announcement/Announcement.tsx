@@ -30,7 +30,11 @@ export const Announcement: React.FC<ComponentAnnouncementProps> = ({
 				)}
 			</div>
 
-			{isOpen && <p className="content">{details}</p>}
+			{isOpen && (
+				<div className="content">
+					<p className="text-truncate">{details}</p>
+				</div>
+			)}
 		</div>
 	);
 };
