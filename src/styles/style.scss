@@ -53,87 +53,166 @@ footer {
 	}
 }
 
-.planning-filters {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	color: colors.$primary;
+.card {
+	// border: 1px solid colors.$gray;
+	box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.1);
+	margin: 5px;
+}
 
-	select {
+// Planning page
+
+.planning {
+	.planning-filters {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
 		color: colors.$primary;
-		background: none;
-		border: none;
-		border-bottom: 1px solid colors.$primary;
-		margin: 0.5rem;
+
+		select {
+			color: colors.$primary;
+			background: none;
+			border: none;
+			border-bottom: 1px solid colors.$primary;
+			margin: 0.5rem;
+		}
+
+		@media screen and (min-width: 600px) {
+			flex-direction: row;
+
+			background: -webkit-linear-gradient(
+				30deg,
+				colors.$secondary 85%,
+				colors.$paper 85%
+			);
+		}
 	}
 
-	@media screen and (min-width: 600px) {
-		flex-direction: row;
+	.planning-days {
+		display: flex;
+		justify-content: flex-end;
+		align-content: flex-end;
+		align-items: center;
+		background: colors.$primary;
+		color: colors.$gray;
+		padding: 1rem 0;
 
-		background: -webkit-linear-gradient(
-			30deg,
-			colors.$secondary 85%,
-			colors.$white 85%
-		);
+		& div {
+			cursor: pointer;
+			background-color: colors.$white;
+			padding-inline: 0.7rem;
+			text-align: center;
+			line-height: 0.9rem;
+
+			p {
+				margin: 0 5px;
+				text-align: center;
+				font-weight: 600;
+				font-size: 1em;
+			}
+
+			small {
+				font-size: 0.6rem;
+			}
+
+			&.active {
+				background: colors.$secondary;
+				color: colors.$primary;
+			}
+		}
+
+		@media screen and (min-width: 600px) {
+			justify-content: center;
+			background: -webkit-linear-gradient(
+				30deg,
+				colors.$secondary 15%,
+				colors.$primary 15%
+			);
+
+			& div {
+				background-color: transparent;
+				color: colors.$white;
+				padding-inline: 2rem;
+
+				&.active {
+					background: -webkit-linear-gradient(
+						15deg,
+						transparent 15%,
+						colors.$secondary 15%,
+						colors.$secondary 85%,
+						transparent 85%
+					);
+				}
+			}
+		}
+	}
+
+	.course-details {
+		p {
+			margin: 0.1rem;
+		}
+
+		.course-image {
+			grid-area: image;
+		}
+		.timing {
+			grid-area: timing;
+		}
+		.duration {
+			grid-area: duration;
+		}
+		.title {
+			grid-area: title;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+		}
+		.button-message {
+			grid-area: button-message;
+		}
+		.status-message {
+			grid-area: status-message;
+		}
+		.button {
+			grid-area: button;
+		}
+
+		display: grid;
+		grid-template-columns: 50% 50%;
+		grid-template-rows: auto;
+		grid-template-areas:
+			"timing duration"
+			"title  ."
+			". button-message"
+			"status-message button";
+
+		@media screen and (min-width: 600px) {
+			display: grid;
+			grid-template-columns: 2fr 2fr 1fr 2fr 2fr 2fr 1fr;
+			grid-template-areas: "image title timing duration status-message button";
+			align-items: center;
+			width: 100%;
+			column-gap: 10px;
+
+			.course-image {
+				width: 100%;
+				height: 100%;
+				background-size: cover;
+				background-repeat: no-repeat;
+				background-position: center;
+			}
+		}
 	}
 }
 
-.planning-days {
-	display: flex;
-	justify-content: flex-end;
-	align-content: flex-end;
-	align-items: center;
-	background: colors.$primary;
-	color: colors.$gray;
-	padding: 1rem 0;
-
-	& div {
-		cursor: pointer;
-		background-color: colors.$white;
-		padding-inline: 0.7rem;
-		text-align: center;
-		line-height: 0.9rem;
-
-		p {
-			margin: 0 5px;
-			text-align: center;
-			font-weight: 600;
-			font-size: 1em;
-		}
-
-		small {
-			font-size: 0.6rem;
-		}
-
-		&.active {
-			background: colors.$secondary;
-			color: colors.$primary;
-		}
-	}
-
+.pc-hidden {
 	@media screen and (min-width: 600px) {
-		justify-content: center;
-		background: -webkit-linear-gradient(
-			30deg,
-			colors.$secondary 15%,
-			colors.$primary 15%
-		);
+		display: none;
+	}
+}
 
-		& div {
-			background-color: transparent;
-			color: colors.$white;
-			padding-inline: 2rem;
-
-			&.active {
-				background: -webkit-linear-gradient(
-					15deg,
-					transparent 15%,
-					colors.$secondary 15%,
-					colors.$secondary 85%,
-					transparent 85%
-				);
-			}
-		}
+.mobile-hidden {
+	@media screen and (max-width: 600px) {
+		display: none;
 	}
 }

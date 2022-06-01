@@ -1,7 +1,12 @@
+/* eslint-disable multiline-ternary */
 import React from "react";
 import { ClosedAnnouncementIcon, DurationIcon } from "src/icons";
 import { Category, ClubCourseByUser, Course, CourseByClub } from "src/types";
-import { getCourseStatus, getCourseStatusElements } from "src/utils";
+import {
+	COURSE_STATUS,
+	getCourseStatus,
+	getCourseStatusElements,
+} from "src/utils";
 
 type ComponentCourseDetailsProps = {
 	courseByClub: CourseByClub;
@@ -24,46 +29,61 @@ export const CourseDetails: React.FC<ComponentCourseDetailsProps> = ({
 	});
 
 	return (
-		<div
-			key={course.id}
-			style={{
-				// TODO: move style to css file
-				display: "inline-grid",
-				gridTemplateColumns: "2fr 2fr 1fr 2fr 2fr 2fr 1fr",
-				borderLeft: `10px solid ${courseCategory?.color}`,
-				alignItems: "center",
-				width: "100%",
-				columnGap: "10px",
-			}}
-		>
+		<div key={course.id} className="course-details card">
 			<div
-				className="course-image"
+				className="course-image mobile-hidden"
 				style={{
-					width: "100%",
-					height: "100%",
+					borderLeft: `10px solid ${courseCategory?.color}`,
 					backgroundImage: `linear-gradient(80deg, transparent 85%, #ffffff 85%), url(${courseData.imageUrl})`,
-					backgroundSize: "cover",
-					backgroundRepeat: "no-repeat",
-					backgroundPosition: "center",
 				}}
 			/>
-			<p>{courseData.name}</p>
-			<div>
+			<div className="title">
+				<p>{courseData.name}</p>
+				<ClosedAnnouncementIcon className="pc-hidden" />
+			</div>
+			<div className="duration">
 				<DurationIcon /> {courseData.duration}
 			</div>
-			<p>
+			<p className="timing">
 				<strong>{course.startingTime}</strong> {course.endingTime}
 			</p>
 
-			<div>
-				{courseStatusElements.title}
-				{courseStatusElements.subtitle}
-			</div>
-			{courseStatusElements.button || <div />}
+			{courseStatus === COURSE_STATUS.WAITING ? (
+				[
+					<p className="button-message pc-hidden" key="waitingMessage">
+						{courseStatusElements.title}
+					</p>,
+					<div className="pc-hidden status-message" key="waitingDescription">
+						<p className="title">{course.waitingPeople}</p>
+						<span className="status-message">
+							{courseStatusElements.subtitle}
+						</span>
+					</div>,
+					<div className="mobile-hidden status-message" key="waitingMessagePC">
+						<p className="title">{courseStatusElements.title}</p>
+						<p className="status-message">
+							{course.waitingPeople} {courseStatusElements.subtitle}
+						</p>
+					</div>,
+				]
+			) : (
+				<div className="status-message">
+					<p className="title">{courseStatusElements.title}</p>
+					<span className="status-message">
+						{courseStatusElements.subtitle}
+					</span>
+				</div>
+			)}
+			<span className="button">{courseStatusElements.button}</span>
 
-			<div>
-				<ClosedAnnouncementIcon />
-			</div>
+			<ClosedAnnouncementIcon className="mobile-hidden" />
 		</div>
 	);
 };
+
+// timing
+// duration
+// title
+// status-message
+// status-description
+// button

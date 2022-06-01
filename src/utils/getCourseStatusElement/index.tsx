@@ -11,7 +11,7 @@ export const getCourseStatusElements = ({
 }) => {
 	const result: {
 		title?: JSX.Element;
-		subtitle?: JSX.Element;
+		subtitle?: JSX.Element | string;
 		button?: JSX.Element;
 	} = {};
 
@@ -39,7 +39,7 @@ export const getCourseStatusElements = ({
 			break;
 		case COURSE_STATUS.WAITING:
 			result.title = <p>Sei in lista d&#39;attesa</p>;
-			result.subtitle = <p>{course.waitingPeople} persone prima di te</p>;
+			result.subtitle = "persone prima di te";
 			result.button = buttonElement("Annulla", "cancel-button");
 			break;
 		case COURSE_STATUS.REGISTRATION_CLOSE:

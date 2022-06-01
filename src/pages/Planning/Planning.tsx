@@ -51,7 +51,7 @@ export const Planning: React.FC<PagePlanningProps> = () => {
 	// JSX
 
 	return (
-		<div>
+		<div className="planning">
 			{/* Dates are mocked and not handled correctly. */}
 			<div className="planning-days">
 				{dates.map((date, index) => (
