@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from "react";
-import { PageDashboardProps } from "src/types";
-import { AnnouncementList } from "src/data";
-import { Announcement } from "src/components";
+import { ClubCourseByUser, PageDashboardProps } from "src/types";
+import { AnnouncementList, UserCourses } from "src/data";
+import { Announcement, SectionTitle } from "src/components";
+import { MagazineIcon, NotificationIcon, PlannerLinkIcon } from "src/icons";
 
 export const Dashboard: React.FC<PageDashboardProps> = () => {
 	const [openAnnouncements, setOpenAnnouncements] = useState<string[]>([]);
@@ -30,5 +31,39 @@ export const Dashboard: React.FC<PageDashboardProps> = () => {
 		[openAnnouncements],
 	);
 
-	return <div className="dashboard">{AnnouncementsElement}</div>;
+	const userWaitingList: ClubCourseByUser[] = Object.values(
+		UserCourses,
+	).flatMap((courses) => courses.filter(({ state }) => state === "waiting"));
+
+	return (
+		<div className="dashboard">
+			<SectionTitle
+				icon={<PlannerLinkIcon />}
+				className="secondary"
+				title="Le tue prossime attività"
+			/>
+			{userWaitingList.length > 0 && (
+				<SectionTitle
+					className="primary"
+					title={`Hai ${userWaitingList.length} attività in lista d'attesa`}
+				/>
+			)}
+			<div>
+				<SectionTitle
+					className="primary"
+					title="Avvisi"
+					icon={<NotificationIcon />}
+					showButton={true}
+				/>
+				{AnnouncementsElement}
+			</div>
+
+			<SectionTitle
+				className="primary"
+				title="Magazine"
+				icon={<MagazineIcon />}
+				showButton={true}
+			/>
+		</div>
+	);
 };

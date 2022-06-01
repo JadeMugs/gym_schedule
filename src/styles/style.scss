@@ -254,12 +254,48 @@ footer {
 // Dashboard
 
 .dashboard {
+	margin: 1rem;
+
 	@media screen and (min-width: 600px) {
 		margin-inline: 10%;
 	}
 
-	margin: 1rem;
-	.announcement > div {
+	.section-title {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+
+		span {
+			display: flex;
+			align-content: center;
+			flex-direction: row;
+			align-items: center;
+			svg {
+				margin-right: 0.5rem;
+			}
+			h2 {
+				font-weight: 600;
+				font-size: 1rem;
+			}
+		}
+
+		&.primary {
+			color: colors.$primary;
+		}
+
+		&.secondary {
+			color: colors.$secondary;
+		}
+
+		button {
+			background: none;
+			border: none;
+			color: colors.$warning;
+		}
+	}
+
+	.announcement > .summary {
 		margin: 5px;
 
 		.read-ribbon {
@@ -268,12 +304,12 @@ footer {
 			color: colors.$warning;
 			font-size: 2rem;
 
-			&::before {
+			&.bullet::before {
 				content: "";
 				display: block;
 				width: 5px;
 				height: 5px;
-				background: colors.$warning;
+				background-color: colors.$warning;
 				border-radius: 50%;
 			}
 		}
@@ -284,6 +320,9 @@ footer {
 		}
 		.title {
 			grid-area: title;
+			&.bold-title {
+				font-weight: 600;
+			}
 		}
 		.icon {
 			grid-area: icon;
@@ -309,5 +348,13 @@ footer {
 			grid-template-columns: 1fr 9fr 1fr 1fr;
 			grid-template-areas: "read-ribbon title date icon";
 		}
+	}
+
+	.announcement > .content {
+		padding: 10px 2rem; // TODO: use grid template to make this fit better
+		overflow: hidden;
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
 	}
 }

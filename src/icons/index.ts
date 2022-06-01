@@ -9,6 +9,8 @@ import {
 	BiTime as DurationIcon,
 } from "react-icons/bi";
 
+import { GoPrimitiveDot as MagazineIcon } from "react-icons/go";
+
 import { MdOutlineLocalFireDepartment as CourseCategoryIcon } from "react-icons/md";
 
 export {
@@ -21,4 +23,5 @@ export {
 	CourseIcon,
 	CourseCategoryIcon,
 	DurationIcon,
+	MagazineIcon,
 };

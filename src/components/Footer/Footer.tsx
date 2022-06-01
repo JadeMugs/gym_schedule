@@ -1,7 +1,6 @@
 import React from "react";
 import { OpenAnnouncementIcon } from "src/icons";
-
-type ComponentFooterProps = {};
+import { ComponentFooterProps } from "src/types";
 
 export const Footer: React.FC<ComponentFooterProps> = () => {
 	return (

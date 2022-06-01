@@ -1,4 +1,5 @@
 /* eslint-disable multiline-ternary */
+// TODO: disable rule
 import React from "react";
 import { OpenAnnouncementIcon, ClosedAnnouncementIcon } from "src/icons";
 import { ComponentAnnouncementProps } from "src/types";
@@ -13,15 +14,14 @@ export const Announcement: React.FC<ComponentAnnouncementProps> = ({
 }) => {
 	return (
 		<div className="announcement card">
-			<div onClick={() => onAnnouncementClick(title)}>
-				{/* TODO: handle css class and style */}
+			<div className="summary" onClick={() => onAnnouncementClick(title)}>
 				{isRead ? (
-					<div className="read-ribbon">{""}</div>
+					<div className="read-ribbon" />
 				) : (
-					<div className="read-ribbon">&bull;</div>
+					<div className="read-ribbon bullet" />
 				)}
 				<small className="date">{date}</small>
-				<h5 className="title">{title}</h5>
+				<p className={`title ${!isRead && "bold-title"}`}>{title}</p>
 
 				{isOpen ? (
 					<OpenAnnouncementIcon className="icon" />
@@ -30,7 +30,7 @@ export const Announcement: React.FC<ComponentAnnouncementProps> = ({
 				)}
 			</div>
 
-			{isOpen && <p>{details}</p>}
+			{isOpen && <p className="content">{details}</p>}
 		</div>
 	);
 };
