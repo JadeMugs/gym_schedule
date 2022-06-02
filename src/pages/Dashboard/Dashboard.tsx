@@ -1,7 +1,19 @@
 import React, { useMemo, useState } from "react";
+import "src/styles/dashboard.scss";
 import { ClubCourseByUser, PageDashboardProps } from "src/types";
-import { AnnouncementList, UserCourses } from "src/data";
-import { Announcement, Magazine, SectionTitle } from "src/components";
+import {
+	AnnouncementList,
+	ClubCoursesById,
+	CoursesById,
+	UserCourses,
+} from "src/data";
+import {
+	Ads,
+	Announcement,
+	CourseReminder,
+	Magazine,
+	SectionTitle,
+} from "src/components";
 import { MagazineIcon, NotificationIcon, PlannerLinkIcon } from "src/icons";
 
 export const Dashboard: React.FC<PageDashboardProps> = () => {
@@ -31,23 +43,65 @@ export const Dashboard: React.FC<PageDashboardProps> = () => {
 		[openAnnouncements],
 	);
 
-	const userWaitingList: ClubCourseByUser[] = Object.values(
-		UserCourses,
-	).flatMap((courses) => courses.filter(({ state }) => state === "waiting"));
+	const userCourses: ClubCourseByUser[] = Object.values(UserCourses).flatMap(
+		(courses) => courses,
+	);
+
+	const userBookedList = userCourses.filter(({ state }) => state === "booked");
+	const userWaitingList = userCourses.filter(
+		({ state }) => state === "waiting",
+	);
+	const courseReminderElement = (
+		courseClubId: string,
+		useWaitingPeople?: boolean,
+	) => {
+		const clubCourse = ClubCoursesById[courseClubId];
+		const couserId = clubCourse.courseId;
+		const waitingPeople = useWaitingPeople
+			? clubCourse.waitingPeople
+			: undefined;
+
+		return (
+			<CourseReminder
+				key={courseClubId}
+				courseData={CoursesById[couserId]}
+				clubCourseData={clubCourse}
+				waitingPeople={waitingPeople}
+			/>
+		);
+	};
 
 	return (
 		<div className="dashboard">
-			<SectionTitle
-				icon={<PlannerLinkIcon />}
-				className="secondary"
-				title="Le tue prossime attività"
-			/>
-			{userWaitingList.length > 0 && (
-				<SectionTitle
-					className="primary"
-					title={`Hai ${userWaitingList.length} attività in lista d'attesa`}
-				/>
-			)}
+			<div className="dashboard-courses">
+				<div>
+					<SectionTitle
+						icon={<PlannerLinkIcon />}
+						className="secondary"
+						title="Le tue prossime attività"
+					/>
+					<div className="courses-booked">
+						{userBookedList.map(({ courseClubId }) =>
+							courseReminderElement(courseClubId),
+						)}
+					</div>
+				</div>
+
+				<div>
+					<SectionTitle
+						className="primary"
+						title={`Hai ${userWaitingList.length} attività in lista d'attesa`}
+					/>
+					<div className="courses-waiting">
+						{userWaitingList.map(({ courseClubId }) =>
+							courseReminderElement(courseClubId, true),
+						)}
+					</div>
+				</div>
+			</div>
+
+			<Ads />
+
 			<div>
 				<SectionTitle
 					className="primary"
@@ -57,6 +111,8 @@ export const Dashboard: React.FC<PageDashboardProps> = () => {
 				/>
 				{AnnouncementsElement}
 			</div>
+
+			<Ads />
 
 			<div>
 				<SectionTitle

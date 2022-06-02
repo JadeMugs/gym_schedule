@@ -1,0 +1,355 @@
+@use "./_colors.scss" as colors;
+@import "./global.scss";
+
+.dashboard {
+	background-color: colors.$paper;
+
+	> div {
+		padding: 1rem;
+
+		* {
+			z-index: 100;
+		}
+	}
+
+	&::before {
+		content: "";
+		position: absolute;
+		background: colors.$primary;
+		height: 150px;
+		width: 100%;
+		z-index: 1;
+	}
+
+	@media screen and (min-width: 600px) {
+		> div {
+			padding-inline: 10%;
+		}
+
+		&::before {
+			justify-content: center;
+			background: -webkit-linear-gradient(
+				30deg,
+				colors.$primary 50%,
+				colors.$secondary 50%
+			);
+		}
+	}
+
+	.section-title {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+
+		span {
+			display: flex;
+			align-content: center;
+			flex-direction: row;
+			align-items: center;
+			svg {
+				margin-right: 0.5rem;
+			}
+			h2 {
+				font-weight: 600;
+				font-size: 1rem;
+			}
+		}
+
+		&.primary {
+			color: colors.$primary;
+		}
+
+		&.secondary {
+			color: colors.$secondary;
+		}
+
+		button {
+			background: none;
+			border: none;
+			color: colors.$warning;
+		}
+	}
+
+	.dashboard-courses {
+		// padding: 5px;
+		display: grid;
+		grid-template-columns: 100%;
+		justify-items: flex-start;
+		justify-items: stretch;
+
+		@media screen and (min-width: 600px) {
+			column-gap: 10%;
+			grid-template-columns: repeat(auto-fit, minmax(300px, 45%));
+		}
+
+		.courses-booked {
+			display: flex;
+			flex-wrap: nowrap;
+			flex-direction: row;
+			overflow: hidden;
+			gap: 5%;
+
+			@media screen and (min-width: 600px) {
+				flex-direction: column;
+			}
+		}
+
+		.course-reminder {
+			background-color: colors.$white;
+			min-width: 300px;
+			width: 100%;
+
+			.image {
+				grid-area: image;
+				min-height: 150px;
+				width: 100%;
+				overflow: hidden;
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: cover;
+			}
+			.name {
+				grid-area: name;
+				display: flex;
+				justify-content: space-between;
+				align-content: center;
+				align-items: center;
+				color: colors.$primary;
+				padding: 5px;
+				padding-right: 2rem;
+				font-size: 1.3rem;
+
+				&.name-overlay {
+					background: -webkit-linear-gradient(
+						30deg,
+						colors.$secondary 90%,
+						transparent 90%
+					);
+				}
+			}
+			.icon {
+				grid-area: icon;
+			}
+			.timing {
+				grid-area: timing;
+				padding: 5px;
+				strong {
+					color: colors.$primary;
+				}
+			}
+			.duration {
+				grid-area: duration;
+				justify-content: center;
+			}
+			.club {
+				padding: 5px;
+				grid-area: club;
+				.club-name {
+					color: colors.$gray;
+				}
+			}
+			.room {
+				padding: 5px;
+				grid-area: room;
+				.room-name {
+					color: colors.$gray;
+				}
+			}
+			p {
+				line-height: 1rem;
+				margin: 0.5rem 0;
+			}
+			.button {
+				margin: 5px;
+				align-self: center;
+				min-height: 2rem;
+				grid-area: button;
+			}
+			.message {
+				grid-area: message;
+				text-align: center;
+				color: colors.$warning;
+			}
+
+			display: grid;
+			grid-template-rows: auto;
+			grid-template-columns: 50% 50%;
+			grid-template-areas:
+				"image image"
+				"name name"
+				"timing duration"
+				"club room";
+
+			&.with-button {
+				grid-template-areas:
+					"name name"
+					"timing duration"
+					"message message"
+					"button button";
+			}
+
+			@media screen and (min-width: 600px) {
+				min-width: 200px;
+				grid-template-columns: 30% 35% 35%;
+				grid-template-areas:
+					"image name name"
+					"image timing duration"
+					"image club room";
+
+				&.with-button {
+					grid-template-areas:
+						"image name name"
+						"image timing duration"
+						"image message button";
+				}
+
+				.message {
+					align-self: center;
+				}
+				.image {
+					height: 100%;
+				}
+				.name {
+					padding-right: 0rem;
+					&.name-overlay {
+						background: none;
+					}
+				}
+			}
+		}
+	}
+
+	.next-activities .course-reminder {
+		display: flex;
+		flex-direction: column;
+		flex-wrap: nowrap;
+		overflow: hidden;
+	}
+
+	.announcement > .summary {
+		margin: 5px;
+
+		.read-ribbon {
+			grid-area: read-ribbon;
+			justify-self: left;
+			color: colors.$warning;
+			font-size: 2rem;
+
+			&.bullet::before {
+				content: "";
+				display: block;
+				width: 5px;
+				height: 5px;
+				background-color: colors.$warning;
+				border-radius: 50%;
+			}
+		}
+		.date {
+			grid-area: date;
+			color: colors.$gray;
+			justify-self: right;
+		}
+		.title {
+			grid-area: title;
+			&.bold-title {
+				font-weight: 600;
+			}
+		}
+		.icon {
+			grid-area: icon;
+			justify-self: right;
+		}
+
+		display: grid;
+		grid-template-rows: auto;
+		grid-template-areas:
+			"read-ribbon date"
+			"title icon";
+		grid-template-columns: 4fr 1fr;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		@media screen and (min-width: 600px) {
+			.read-ribbon,
+			.icon {
+				justify-self: center;
+			}
+
+			grid-template-columns: 1fr 9fr 1fr 1fr;
+			grid-template-areas: "read-ribbon title date icon";
+		}
+	}
+
+	.announcement > .content {
+		padding: 10px 2rem; // TODO: use grid template to make this fit better
+
+		p {
+			margin: 0;
+		}
+	}
+
+	.magazines {
+		// display: grid;
+		display: flex;
+		flex-wrap: nowrap;
+		column-gap: 1rem;
+		overflow: hidden;
+
+		.magazine {
+			min-width: 200px;
+			position: relative;
+
+			.icon {
+				text-align: center;
+				font-size: 1.5rem;
+				line-height: 1rem;
+				width: 64px;
+				position: absolute;
+				right: 5px;
+				transform: translateY(-60%);
+				background: -webkit-linear-gradient(
+					30deg,
+					transparent 30%,
+					colors.$secondary 30%,
+					colors.$secondary 70%,
+					transparent 70%
+				);
+			}
+
+			.magazine-content {
+				margin: 0.5rem;
+
+				h4 {
+					color: colors.$warning;
+				}
+
+				.date {
+					color: colors.$gray;
+					font-size: 0.8rem;
+				}
+			}
+		}
+	}
+
+	.ads {
+		margin: 3rem 10%;
+		height: 80px;
+		background: -webkit-linear-gradient(
+			30deg,
+			colors.$primary 50%,
+			colors.$secondary 50%
+		);
+	}
+}
+
+.grid-half {
+	display: grid;
+	grid-template-columns: 1fr;
+
+	@media screen and (min-width: 600px) {
+		grid-template-columns: 50% 50%;
+		column-gap: 2rem;
+	}
+}

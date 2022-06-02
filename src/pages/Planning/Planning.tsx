@@ -1,10 +1,12 @@
 import React, { useMemo, useState } from "react";
+import "src/styles/planning.scss";
 import { CourseDetails } from "src/components";
 import {
 	Categories,
 	Clubs,
 	Courses,
 	CoursesByClub,
+	CoursesById,
 	UserCourses,
 } from "src/data";
 import { PagePlanningProps } from "src/types";
@@ -27,11 +29,6 @@ export const Planning: React.FC<PagePlanningProps> = () => {
 
 	// Memoized data
 
-	const coursesData = useMemo(
-		() => Object.fromEntries(Courses.map((course) => [course.id, course])),
-		[],
-	);
-
 	const currentClubCourses = useMemo(() => {
 		if (!selectedClub) return [];
 		let courses = CoursesByClub[selectedClub];
@@ -42,11 +39,11 @@ export const Planning: React.FC<PagePlanningProps> = () => {
 		if (selectedCategory && selectedCategory !== "all") {
 			courses = courses.filter(
 				(course) =>
-					coursesData[course.courseId]?.categoryId === selectedCategory,
+					CoursesById[course.courseId]?.categoryId === selectedCategory,
 			);
 		}
 		return courses;
-	}, [selectedClub, selectedCourse, selectedCategory, coursesData]);
+	}, [selectedClub, selectedCourse, selectedCategory]);
 
 	// JSX
 
@@ -120,10 +117,10 @@ export const Planning: React.FC<PagePlanningProps> = () => {
 			</div>
 
 			{/* Courses */}
-			<div style={{ marginInline: "10%" }}>
+			<div style={{ margin: "3rem 10%" }}>
 				{selectedClub &&
 					currentClubCourses.map((course) => {
-						const courseData = coursesData[course.courseId];
+						const courseData = CoursesById[course.courseId];
 						const currentUserCourse = UserCourses[selectedClub].find(
 							(userCourse) => userCourse.courseClubId === course.id,
 						);

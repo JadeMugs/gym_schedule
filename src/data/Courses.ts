@@ -138,6 +138,10 @@ export const Courses: CourseList = [
 	},
 ];
 
+export const CoursesById = Object.fromEntries(
+	Courses.map((course) => [course.id, course]),
+);
+
 export const CoursesByClub: CoursesListByClub = Clubs.reduce(
 	(clubs, { id }) => ({
 		...clubs,
@@ -165,6 +169,12 @@ export const CoursesByClub: CoursesListByClub = Clubs.reduce(
 	{},
 );
 
+export const ClubCoursesById = Object.fromEntries(
+	Object.entries(CoursesByClub).flatMap(([_, courses]) =>
+		courses.map((course) => [course.id, course]),
+	),
+);
+
 export const UserCourses: UserCoursesByClub = Object.entries(
 	CoursesByClub,
 ).reduce(
@@ -172,7 +182,10 @@ export const UserCourses: UserCoursesByClub = Object.entries(
 		...clubs,
 		[clubId]: courses.map(({ id }, index) => ({
 			courseClubId: id,
-			state: MOCK_COURSE_STATE[index % MOCK_COURSE_STATE.length],
+			state:
+				clubId === "ClubRavizza"
+					? MOCK_COURSE_STATE[index % MOCK_COURSE_STATE.length]
+					: undefined,
 		})),
 	}),
 	{},

@@ -41,11 +41,11 @@ export const CourseDetails: React.FC<ComponentCourseDetailsProps> = ({
 				<p>{courseData.name}</p>
 				<ClosedAnnouncementIcon className="pc-hidden" />
 			</div>
-			<div className="duration">
-				<DurationIcon /> {courseData.duration}
+			<div className="duration duration-container">
+				<DurationIcon size="20px" /> {courseData.duration}
 			</div>
 			<p className="timing">
-				<strong>{course.startingTime}</strong> {course.endingTime}
+				{course.startingTime} <span>{course.endingTime}</span>
 			</p>
 
 			{courseStatus === COURSE_STATUS.WAITING ? (
@@ -54,24 +54,22 @@ export const CourseDetails: React.FC<ComponentCourseDetailsProps> = ({
 						{courseStatusElements.title}
 					</p>,
 					<div className="pc-hidden status-message" key="waitingDescription">
-						<p className="title">{course.waitingPeople}</p>
-						<span className="status-message">
+						<p className="status-title">{course.waitingPeople}</p>
+						<p className="status-text-message">
 							{courseStatusElements.subtitle}
-						</span>
+						</p>
 					</div>,
 					<div className="mobile-hidden status-message" key="waitingMessagePC">
-						<p className="title">{courseStatusElements.title}</p>
-						<p className="status-message">
+						<p className="status-title">{courseStatusElements.title}</p>
+						<p className="status-text-message">
 							{course.waitingPeople} {courseStatusElements.subtitle}
 						</p>
 					</div>,
 				]
 			) : (
 				<div className="status-message">
-					<p className="title">{courseStatusElements.title}</p>
-					<span className="status-message">
-						{courseStatusElements.subtitle}
-					</span>
+					<p className="status-title">{courseStatusElements.title}</p>
+					<p className="status-text-message">{courseStatusElements.subtitle}</p>
 				</div>
 			)}
 			<span className="button">{courseStatusElements.button}</span>
